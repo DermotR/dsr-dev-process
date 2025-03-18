@@ -1,0 +1,26 @@
+{
+  "name": "dsrflow",
+  "version": "0.1.0",
+  "description": "LLM-Assisted Development Methodology",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests yet\""
+  },
+  "keywords": [
+    "llm",
+    "development",
+    "methodology",
+    "process",
+    "documentation"
+  ],
+  "author": "DSRFlow Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/dsrflow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/dsrflow/issues"
+  },
+  "homepage": "https://github.com/yourusername/dsrflow#readme"
+}
