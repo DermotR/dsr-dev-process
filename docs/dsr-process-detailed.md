@@ -10,42 +10,94 @@ This document outlines a comprehensive, iterative approach to software developme
 
 ### Process Steps:
 
-1. **Define Core Use Case**
-   - Start with a clear, specific user story or use case
-   - Format as: "As a [role], I want to [action], so that [benefit]"
-   - Ensure the use case represents a key value proposition
+> **Note on Flexibility**: While these steps are presented sequentially, in practice they often happen concurrently and iteratively. The goal is to organize thinking, not enforce a rigid process. During requirements discovery, conversations naturally flow between modules and levels of detail. The framework below helps organize these insights rather than constraining the discovery process.
 
-2. **Brainstorm Requirements with Claude**
-   - Conduct structured conversations with Claude to explore:
+1. **Concurrent Functional Decomposition and Analysis**
+   - Identify functional domains or modules while analyzing use cases
+   - Examples of modules: User Management, Content Management, Reporting, Payment Processing
+   - Use modules as organizational units, not strict boundaries
+   - Create a simple module relationship map to visualize connections
+   
+   **Example Module Relationship Map (Text Version)**:
+   ```
+   User Management Module
+   ├── Handles: authentication, profiles, permissions
+   ├── Provides data to → Reporting Module
+   ├── Provides authentication to → ALL other modules
+   └── Consumes payment status from → Payment Module
+   
+   Content Management Module
+   ├── Handles: creating/editing content, categorization, publishing
+   ├── Provides content to → Public Portal Module  
+   ├── Sends usage data to → Reporting Module
+   └── Receives user data from → User Management Module
+   
+   Payment Processing Module
+   ├── Handles: payment methods, transactions, invoicing
+   ├── Updates user accounts in → User Management Module
+   ├── Provides transaction data to → Reporting Module
+   └── Triggers content access in → Content Management Module
+   ```
+
+2. **Flexible Module-Based Requirements Organization**
+   - Organize requirements by module for clarity and focus
+   - Allow natural transitions between modules during discovery sessions
+   - It's acceptable to sketch high-level functionality across multiple modules in one session
+   - Circle back to add detail to priority modules as needed
+   - Use standardized requirement ID format: `[module]-[role]-[number]-[action]`
+     - Examples: `marketing-admin-123-process-refund`, `customer-user-013-book-session`
+     - Module prefix ensures requirements are organized by functional domain
+     - This naming convention applies universally across user stories, requirements, and features
+     - Improves traceability and makes referencing specific requirements easier
+
+3. **Collaborative Requirements Exploration with Claude**
+   - Use Claude to facilitate open-ended discussions that may span multiple modules
+   - When a conversation begins to cover too many areas, use prompts to refocus:
+     - "Let's park the payment processing ideas for now and focus on completing the user management requirements."
+     - "I notice we're discussing several modules. Let's document these cross-cutting concerns and then return to our focus module."
+   - Explore for each module:
      - Functional requirements
      - Core user flows and journeys
      - Entity relationships and data needs
      - Technical constraints and considerations
      - Non-functional requirements (performance, security, etc.)
-   - Use probing questions: "What else might users need?" or "What edge cases should we handle?"
+   - Use LLM prompting for creative brainstorming:
+     - Generate alternative approaches to solving problems
+     - Anticipate user needs and edge cases
+     - Explore different technical implementation strategies
+     - Compare pros and cons of various solutions
 
-3. **Create Visual Representations**
-   - Develop diagrams using Mermaid for:
+4. **Create Visual Representations**
+   - Develop diagrams using Mermaid specifically for the current module:
      - Use case diagrams (actor interactions)
      - Entity relationship diagrams (data model)
      - Sequence diagrams (key workflows)
      - Component diagrams (system architecture)
    - Focus on clarity over comprehensiveness in early iterations
+   - Create UI mockups and wireframes to visualize the module's user experience:
+     - Use Tailwind CSS for rapid prototyping
+     - Build simple interactive prototypes
+     - Include multiple design iterations to explore alternatives
+     - Store and organize mockups in a prototype catalog by module (see Web Development Catalog below)
+   - Document interfaces between the current module and other modules
 
-4. **Cross-validate with Another Model**
-   - Ask a different LLM (e.g., GPT-4) to review requirements
+5. **Cross-validate with Another Model**
+   - Ask a different LLM (e.g., GPT-4) to review module-specific requirements
    - Look for gaps, inconsistencies, or alternative perspectives
-   - Ask specifically: "What important considerations are missing?"
+   - Ask specifically: "What important considerations are missing from this module?"
    - Have the second model summarize key points to ensure clarity
+   - Validate module boundaries and interfaces with other modules
 
-5. **Create Comprehensive Specification**
-   - Develop a structured markdown document containing:
-     - User stories and detailed use cases
+6. **Create Module-Specific Specification**
+   - Develop a structured markdown document for each module containing:
+     - User stories and detailed use cases with standardized IDs
      - Visual data model with field definitions
      - API specifications (endpoints, parameters, responses)
      - Business rules and constraints catalog
      - Non-functional requirements
      - Technical stack recommendations
+     - UI mockups and design iterations
+   - Clearly document dependencies and interfaces with other modules
 
 ### Recommended Tools:
 
@@ -58,10 +110,84 @@ This document outlines a comprehensive, iterative approach to software developme
   - [Notion](https://notion.so) - Collaborative documentation with Mermaid support
   - [Obsidian](https://obsidian.md/) - Knowledge management with Mermaid support
 
+- **UI Design & Prototyping**:
+  - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework for rapid UI development
+  - [React](https://reactjs.org/) - Component-based UI library
+  - [Vite](https://vitejs.dev/) - Fast build tool for modern web projects
+  - [Figma](https://www.figma.com/) - Collaborative interface design tool
+  - Web Development Catalog (see section below) - For organizing and referencing UI mockups
+
 - **LLM Interaction**:
-  - Claude (web interface or API) - Primary model for requirements gathering
+  - Claude (web interface or API) - Primary model for requirements gathering and brainstorming
   - Another LLM model (for cross-validation)
   - Claude Code - For implementation patterns and architecture guidance
+
+### Web Development Catalog
+
+A simple React + Tailwind CSS project is recommended to help catalog design iterations and UI prototypes, organized by functional module:
+
+- **Purpose**: Create a living documentation of UI components, mockups, and design iterations
+- **Benefits**:
+  - Centralizes all design artifacts in one browsable interface
+  - Allows team members to see the evolution of designs
+  - Provides a reference library of components for reuse
+  - Makes it easy to showcase alternatives and get feedback
+  - Supplements written documentation with visual examples
+  - Maintains organization while allowing flexible development
+
+- **Module-Based Organization**:
+  - Primary navigation based on functional modules (e.g., User Management, Content, Payments)
+  - Secondary navigation by requirement ID within each module
+  - Special section for module interfaces and integration points
+  - Helps maintain focus by separating concerns into distinct modules
+  - Prevents scope creep by making module boundaries visible
+
+- **Implementation**:
+  - Simple React + Tailwind CSS app with minimal dependencies
+  - Static site with no backend requirements
+  - Folder structure mirrors module organization (e.g., `/src/modules/moduleA/`)
+  - Organized by module and feature ID using the standard naming convention
+  - Each mockup includes metadata (date, purpose, feedback, module)
+  - Can be deployed as static site or run locally
+
+- **Example UI Prototype Catalog Structure for Non-Technical Readers**:
+
+```
+UI Prototype Catalog
+│
+├── Modules
+│   │
+│   ├── User Management
+│   │   ├── Login Screen [user-001-login]
+│   │   │   ├── Version 1 - Basic login form
+│   │   │   ├── Version 2 - With social login options
+│   │   │   └── Version 3 - Final design with password recovery
+│   │   │
+│   │   └── User Profile [user-002-view-profile]
+│   │       ├── Version 1 - Simple profile view
+│   │       └── Version 2 - With editing capabilities
+│   │
+│   ├── Content Management
+│   │   ├── Article Editor [content-001-create-article]
+│   │   └── Media Gallery [content-002-manage-media]
+│   │
+│   └── Payment Processing
+│       ├── Checkout Flow [payment-001-checkout]
+│       └── Invoice History [payment-002-view-invoices]
+│
+├── Cross-Module Interfaces
+│   ├── User → Content (Content permissions)
+│   ├── Content → Payment (Premium content access)
+│   └── Payment → User (Subscription status)
+│
+└── Design System
+    ├── Color Palette
+    ├── Typography
+    ├── Common Components
+    └── Responsive Breakpoints
+```
+
+This organization allows stakeholders to easily navigate between different functional areas while seeing relationships between modules. While organized by module, the prototype catalog doesn't restrict when or how mockups are created - early discovery sessions might populate several modules at once with basic mockups, which are then refined iteratively.
 
 ### Mermaid UML Resources:
 
