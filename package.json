@@ -1,5 +1,5 @@
 {
-  "name": "dsrflow",
+  "name": "dsr-dev-proc",
   "version": "0.1.0",
   "description": "LLM-Assisted Development Methodology",
   "main": "index.js",
@@ -13,14 +13,14 @@
     "process",
     "documentation"
   ],
-  "author": "DSRFlow Contributors",
+  "author": "dsr-dev-proc Contributors",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/dsrflow.git"
+    "url": "git+https://github.com/dermotr/dsr-dev-process.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/dsrflow/issues"
+    "url": "https://github.com/dermotr/dsr-dev-process/issues"
   },
-  "homepage": "https://github.com/yourusername/dsrflow#readme"
+  "homepage": "https://github.com/dermotr/dsr-dev-process#readme"
 }

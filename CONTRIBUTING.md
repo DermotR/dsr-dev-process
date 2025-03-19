@@ -1,6 +1,6 @@
-# Contributing to DSRFlow
+# Contributing to dsr-dev-proc
 
-Thank you for your interest in contributing to DSRFlow! This document provides guidelines and instructions for contributing.
+Thank you for your interest in contributing to dsr-dev-proc! This document provides guidelines and instructions for contributing.
 
 ## Code of Conduct
 

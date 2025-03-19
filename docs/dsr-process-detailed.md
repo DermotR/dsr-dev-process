@@ -1,7 +1,7 @@
 # Iterative LLM-Assisted Development Process Guide
-**Version 1.0 - DSRFlow**
+**Version 1.0 - dsr-dev-proc**
 
-This document outlines a comprehensive, iterative approach to software development that leverages Large Language Models (LLMs) at each stage of the process. The DSRFlow methodology emphasizes thorough documentation, visual modeling, and continuous refinement to build high-quality software systems.
+This document outlines a comprehensive, iterative approach to software development that leverages Large Language Models (LLMs) at each stage of the process. The dsr-dev-proc methodology emphasizes thorough documentation, visual modeling, and continuous refinement to build high-quality software systems.
 
 ## 1. Requirements Discovery Phase
 
@@ -196,38 +196,45 @@ This organization allows stakeholders to easily navigate between different funct
 - [Mermaid Sequence Diagrams](https://mermaid.js.org/syntax/sequenceDiagram.html)
 - [GitHub's Mermaid Documentation](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/)
 
-## 2. Architecture & Development Phase
+## 2. Core Implementation Phase
 
 **Input**: Comprehensive specification document  
-**Output**: Project structure and boilerplate code
+**Output**: Working implementation of core use cases with project structure, architecture, and supporting assets
 
 ### Process Steps:
 
-1. **Define Project Architecture**
-   - Use Claude Code to outline overall system architecture
+1. **Implement Core Use Cases**
+   - Build initial working implementation of all essential features
+   - Focus on functionality over optimization at this stage
+   - Ensure all primary user journeys are implemented
+   - Create minimal viable implementation of each core requirement
+
+2. **Define Project Architecture**
+   - Use Claude Code or similar agentic Coding Assistant as the primary tool
+   - Define overall system architecture based on requirements
    - Identify key components and their interactions
    - Determine appropriate design patterns
    - Choose technology stack based on requirements
 
-2. **Create Folder Structure & Boilerplate**
-   - Generate an organized folder structure for the project
+3. **Create Folder Structure & Boilerplate**
+   - Use Claude Code to generate an organized folder structure
    - Create initial project configuration files
    - Set up basic application scaffolding
    - Implement foundational components
 
-3. **Define Database Schema**
-   - Create schema definitions based on data model
+4. **Define Database Schema**
+   - Use Claude Code to create schema definitions based on data model
    - Include indexes, constraints, and relationships
    - Generate migration scripts if applicable
    - Set up seed data for development
 
-4. **Create DevOps Assets**
-   - Generate CI/CD workflow configurations
+5. **Create DevOps Assets**
+   - Use Claude Code to generate CI/CD workflow configurations
    - Create Docker files or containerization scripts
    - Set up testing frameworks and initial tests
    - Establish deployment configurations
 
-5. **Update Documentation**
+6. **Update Documentation**
    - Enhance the specification with implementation details
    - Document architectural decisions and rationales
    - Create technical documentation for the codebase
@@ -236,7 +243,7 @@ This organization allows stakeholders to easily navigate between different funct
 ### Recommended Tools:
 
 - **LLM Tools**:
-  - **Claude Code** - Critical for architectural and design code implementation
+  - **Claude Code or similar agentic Coding Assistant** - Core tool for Phase 2 implementation, handling file/folder creation, boilerplate code, schema definition, and implementation of all core use cases
   - **Cursor in Agent mode using Claude 3.7** - For targeted refinement at the individual component level (never across the entire codebase)
   - **Claude** (web interface or API) - For requirements gathering and documentation
 
@@ -256,8 +263,8 @@ This organization allows stakeholders to easily navigate between different funct
 
 ## 3. Refinement Phase
 
-**Input**: Basic application with core use cases implemented  
-**Output**: Refined and optimized application
+**Input**: Working implementation of core use cases from Phase 2  
+**Output**: Refined and optimized application with improved quality and performance
 
 ### Process Steps:
 
@@ -303,7 +310,7 @@ This organization allows stakeholders to easily navigate between different funct
 
 ## 4. Continuous Iteration
 
-The DSRFlow process is inherently iterative. After completing the Refinement Phase, the team should cycle through the following steps, deepening understanding and improving implementation with each iteration:
+The dsr-dev-proc process is inherently iterative. After completing the Refinement Phase, the team should cycle through the following steps, deepening understanding and improving implementation with each iteration:
 
 ### 1. Evaluate Current Implementation Against Original Requirements
 
@@ -395,7 +402,7 @@ The DSRFlow process is inherently iterative. After completing the Refinement Pha
 - Performance benchmark results compared to targets
 - User feedback summary from testing or limited release
 
-Each iteration increases the resolution of understanding and improves the quality of the implementation. Documentation should evolve alongside the code to maintain a comprehensive and accurate representation of the system. The most valuable iterations often come from real-world usage insights, making early user feedback essential to the DSRFlow process.
+Each iteration increases the resolution of understanding and improves the quality of the implementation. Documentation should evolve alongside the code to maintain a comprehensive and accurate representation of the system. The most valuable iterations often come from real-world usage insights, making early user feedback essential to the dsr-dev-proc process.
 
 ### Iteration Tracking Tools:
 
@@ -431,4 +438,4 @@ Each iteration increases the resolution of understanding and improves the qualit
    - Seek diverse perspectives on complex problems
    - Document alternative approaches considered
 
-By following the DSRFlow process and adhering to these best practices, teams can leverage the power of LLMs to create well-documented, thoughtfully designed software systems that evolve through iterative refinement.
+By following the dsr-dev-proc process and adhering to these best practices, teams can leverage the power of LLMs to create well-documented, thoughtfully designed software systems that evolve through iterative refinement.
