@@ -5,8 +5,9 @@ This document outlines a comprehensive, iterative approach to software developme
 
 > **Key Ideas at a Glance:**
 > 
-> - **UI-First Approach**: Start with sketches and wireframes to drive requirements
-> - **LLM at the Center**: Use Claude for both requirements exploration and code generation
+> - **UI-First Approach**: Start with sketches and wireframes to drive requirements, using LLM image models
+> - **LLM at the Center**: Use Claude for requirements exploration and Claude Code for implementation
+> - **React Code Generation**: Generate code snippets during requirements, use in implementation
 > - **Modular Organization**: Structure work by functional domains for clarity
 > - **Visual Documentation**: Leverage diagrams and prototypes to enhance understanding
 > - **Iterative Refinement**: Build, learn, refine in continuous cycles
@@ -64,9 +65,11 @@ This document outlines a comprehensive, iterative approach to software developme
 3. **Collaborative Requirements Exploration with Claude**
    - Use Claude as the central tool for requirements ideation and exploration
    - Begin with UI sketches to focus minds on functionality and flesh out use cases:
-     - Start with pencil sketches as input to the LLM
+     - Start with pencil sketches or wireframes as input to the LLM image models
      - Create simple wireframes using tools like Balsamiq or Figma
      - Use these visual elements to drive concrete discussions about functionality
+     - Generate React code snippets from UI discussions for the catalog
+     - Store these code snippets for potential use in the implementation phase
    - When a conversation begins to cover too many areas, use prompts to refocus:
      - "Let's park the payment processing ideas for now and focus on completing the user management requirements."
      - "I notice we're discussing several modules. Let's document these cross-cutting concerns and then return to our focus module."
@@ -140,20 +143,23 @@ This document outlines a comprehensive, iterative approach to software developme
 
 - **LLM Interaction**:
   - Claude (web interface or API) - Primary model for requirements gathering and brainstorming
+  - Claude Vision or similar image-capable LLMs - For ingesting wireframes and sketches
+  - Claude Code or similar - Primary tool for implementation and code generation
   - Another LLM model (for cross-validation)
-  - Claude Code - For implementation patterns and architecture guidance
 
 ### Web Development Catalog
 
-A simple React + Tailwind CSS project is recommended to help catalog design iterations and UI prototypes, organized by functional module:
+A simple React + Tailwind CSS project is recommended to help catalog design iterations, UI prototypes, and LLM-generated code snippets, organized by functional module:
 
-- **Purpose**: Create a living documentation of UI components, mockups, and design iterations
+- **Purpose**: Create a living documentation and testing ground for designs and code
 - **Benefits**:
-  - Centralizes all design artifacts in one browsable interface
-  - Allows team members to see the evolution of designs
+  - Centralizes all design artifacts and code snippets in one browsable interface
+  - Allows iteration on designs using both code and images in context
+  - Provides a functional testing environment for LLM-generated React components
+  - Allows team members to see the evolution of designs and code
   - Provides a reference library of components for reuse
   - Makes it easy to showcase alternatives and get feedback
-  - Supplements written documentation with visual examples
+  - Supplements written documentation with visual examples and working code
   - Maintains organization while allowing flexible development
 
 - **Module-Based Organization**:
@@ -169,32 +175,53 @@ A simple React + Tailwind CSS project is recommended to help catalog design iter
   - Folder structure mirrors module organization (e.g., `/src/modules/moduleA/`)
   - Organized by module and feature ID using the standard naming convention
   - Each mockup includes metadata (date, purpose, feedback, module)
+  - LLM-generated React components are directly embedded and testable
+  - Iterate on designs using both code and images in context
   - Can be deployed as static site or run locally
+  - Serves as both documentation and testing ground for components
 
 - **Example UI Prototype Catalog Structure for Non-Technical Readers**:
 
 ```
-UI Prototype Catalog
+UI Prototype and Code Catalog
 │
 ├── Modules
 │   │
 │   ├── User Management
 │   │   ├── Login Screen [user-001-login]
 │   │   │   ├── Version 1 - Basic login form
+│   │   │   │   ├── Design (Wireframe/Mockup)
+│   │   │   │   └── Code (React Component)
 │   │   │   ├── Version 2 - With social login options
+│   │   │   │   ├── Design (Wireframe/Mockup)
+│   │   │   │   └── Code (React Component)
 │   │   │   └── Version 3 - Final design with password recovery
+│   │   │       ├── Design (Wireframe/Mockup)
+│   │   │       └── Code (React Component)
 │   │   │
 │   │   └── User Profile [user-002-view-profile]
 │   │       ├── Version 1 - Simple profile view
+│   │       │   ├── Design (Wireframe/Mockup)
+│   │       │   └── Code (React Component)
 │   │       └── Version 2 - With editing capabilities
+│   │           ├── Design (Wireframe/Mockup)
+│   │           └── Code (React Component)
 │   │
 │   ├── Content Management
 │   │   ├── Article Editor [content-001-create-article]
+│   │   │   ├── Design (Wireframe/Mockup)
+│   │   │   └── Code (React Component)
 │   │   └── Media Gallery [content-002-manage-media]
+│   │       ├── Design (Wireframe/Mockup)
+│   │       └── Code (React Component)
 │   │
 │   └── Payment Processing
 │       ├── Checkout Flow [payment-001-checkout]
+│       │   ├── Design (Wireframe/Mockup)
+│       │   └── Code (React Component)
 │       └── Invoice History [payment-002-view-invoices]
+│           ├── Design (Wireframe/Mockup)
+│           └── Code (React Component)
 │
 ├── Cross-Module Interfaces
 │   ├── User → Content (Content permissions)
@@ -205,10 +232,19 @@ UI Prototype Catalog
     ├── Color Palette
     ├── Typography
     ├── Common Components
+    │   ├── Buttons
+    │   │   ├── Design (Visual Spec)
+    │   │   └── Code (Working Components)
+    │   ├── Forms
+    │   │   ├── Design (Visual Spec)
+    │   │   └── Code (Working Components)
+    │   └── Cards
+    │       ├── Design (Visual Spec)
+    │       └── Code (Working Components)
     └── Responsive Breakpoints
 ```
 
-This organization allows stakeholders to easily navigate between different functional areas while seeing relationships between modules. While organized by module, the prototype catalog doesn't restrict when or how mockups are created - early discovery sessions might populate several modules at once with basic mockups, which are then refined iteratively.
+This organization allows stakeholders to easily navigate between different functional areas while seeing relationships between modules. The catalog serves dual purposes: documenting the design evolution and providing a functional environment to test and iterate on LLM-generated React components in context. While organized by module, the catalog doesn't restrict when or how components are created - early discovery sessions might populate several modules at once with basic designs and code, which are then refined iteratively both visually and functionally.
 
 ### Mermaid UML Resources:
 
@@ -222,24 +258,27 @@ This organization allows stakeholders to easily navigate between different funct
 **Input**: Comprehensive specification document  
 **Output**: Working implementation of core use cases with project structure, architecture, and supporting assets
 
-> **Phase Summary**: Implement essential features, define architecture with Claude Code, establish project structure, create database schema, set up DevOps assets, and document implementation details. Generate working React code directly from UI mockups.
+> **Phase Summary**: Implementation is primarily done by Claude Code or similar LLM agents. Implement essential features, define architecture, establish project structure, create database schema, set up DevOps assets, and document implementation details. Utilize React code snippets from requirements phase.
 
 ### Process Steps:
 
 1. **Implement Core Use Cases**
+   - Use Claude Code or similar agentic Coding Assistant for most implementation work
    - Build initial working implementation of all essential features
    - Focus on functionality over optimization at this stage
    - Ensure all primary user journeys are implemented
    - Create minimal viable implementation of each core requirement
+   - Utilize code snippets from the requirements phase where applicable
 
 2. **Define Project Architecture**
-   - Use Claude Code or similar agentic Coding Assistant as the primary tool
+   - Use Claude Code or similar agentic Coding Assistant as the primary implementation tool
+   - Most of the coding in this phase will be done by Claude Code or similar LLM agents
    - Define overall system architecture based on requirements
    - Identify key components and their interactions
    - Determine appropriate design patterns
    - Choose technology stack based on requirements
    - Leverage LLMs to generate working React code:
-     - Use UI mockups from requirements phase as visual references
+     - Use UI mockups and code snippets from requirements phase as references
      - Generate code that can be directly integrated into the catalog site
      - Refine generated code through iterative prompting
 
@@ -270,9 +309,9 @@ This organization allows stakeholders to easily navigate between different funct
 ### Recommended Tools:
 
 - **LLM Tools**:
-  - **Claude Code or similar agentic Coding Assistant** - Core tool for Phase 2 implementation, handling file/folder creation, boilerplate code, schema definition, and implementation of all core use cases
-  - **Cursor in Agent mode using Claude 3.7** - For targeted refinement at the individual component level (never across the entire codebase)
-  - **Claude** (web interface or API) - For requirements gathering and documentation
+  - **Claude Vision or similar multimodal LLMs** - For requirements gathering, documentation, and analyzing wireframes/sketches during the requirements phase
+  - **Claude Code or similar high-quality agentic Coding Assistant** - Primary tool for Phase 2 implementation, handling the majority of coding tasks including file/folder creation, boilerplate code, schema definition, and implementation of all core use cases
+  - **Cursor/Copilot or similar cost-effective agentic assistants** - For targeted refinement at the individual component level in the refinement phase (focusing narrowly on a few files at a time)
 
 - **Project Stack & Scaffolding**:
   - [Vite](https://vitejs.dev/) - Fast frontend tooling for React
@@ -293,12 +332,13 @@ This organization allows stakeholders to easily navigate between different funct
 **Input**: Working implementation of core use cases from Phase 2  
 **Output**: Refined and optimized application with improved quality and performance
 
-> **Phase Summary**: Focus on component-level refinement using Cursor Agent, refactor code for quality and performance, keep documentation updated, and gather feedback for the next iteration cycle.
+> **Phase Summary**: Focus on component-level refinement using cost-effective tools like Cursor or Copilot in VS Code, narrowly targeting just a few files at a time. Refactor code for quality and performance, keep documentation updated, and gather feedback for the next iteration cycle.
 
 ### Process Steps:
 
 1. **Component-Level Refinement**
-   - Use Cursor Agent to focus on specific components
+   - Use cheaper agentic assistants like Cursor or Copilot in VS Code
+   - Focus narrowly on just a few files at a time
    - Improve code quality and performance
    - Add edge case handling and error recovery
    - Enhance component documentation
@@ -324,8 +364,10 @@ This organization allows stakeholders to easily navigate between different funct
 ### Recommended Tools:
 
 - **Code Refinement**:
-  - [Cursor in Agent mode with Claude 3.7](https://cursor.sh/) - For targeted component-level refinements (never across the entire codebase)
+  - [Cursor in Agent mode](https://cursor.sh/) - For targeted component-level refinements (using cost-effective models)
+  - [GitHub Copilot](https://github.com/features/copilot) - In VS Code for focused file edits
   - [ESLint](https://eslint.org/) - Code linting and static analysis
+  - Note: Always focus narrowly on just a few files at a time in this phase
 
 - **Documentation**:
   - [JSDoc](https://jsdoc.app/) / [PyDoc](https://docs.python.org/3/library/pydoc.html) - Code documentation
@@ -452,15 +494,18 @@ Each iteration increases the resolution of understanding and improves the qualit
 - Automate documentation generation where appropriate
 
 ### 2. **Leverage LLM Strengths**
-- Use Claude for creative ideation and requirement expansion
-- Use Claude Code for structured code generation and React components
-- Use Cursor for targeted refinements and improvements
+- Use multimodal models (Claude Vision) for requirements and prototyping
+- Use high-quality models (Claude Code) for the heavy lifting in implementation
+- Use cost-effective agentic assistants (Cursor, Copilot) for focused refinements
+- Match LLM capabilities to specific phase needs for optimal results
 - Save important outputs before ending LLM sessions
 
 ### 3. **Start with UI**
 - Begin with pencil sketches to drive requirements discussions
 - Use simple wireframes to focus on functionality and user experience
-- Generate working React code from UI mockups
+- Use LLM image models to ingest and analyze wireframes or sketches
+- Generate working React code snippets from UI discussions during requirements phase
+- Store these code snippets in the catalog for the implementation phase
 
 ### 4. **Establish Clear Checkpoints**
 - Define clear criteria for moving between phases
