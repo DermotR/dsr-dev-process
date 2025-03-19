@@ -3,10 +3,21 @@
 
 This document outlines a comprehensive, iterative approach to software development that leverages Large Language Models (LLMs) at each stage of the process. The dsr-dev-proc methodology emphasizes thorough documentation, visual modeling, and continuous refinement to build high-quality software systems.
 
+> **Key Ideas at a Glance:**
+> 
+> - **UI-First Approach**: Start with sketches and wireframes to drive requirements
+> - **LLM at the Center**: Use Claude for both requirements exploration and code generation
+> - **Modular Organization**: Structure work by functional domains for clarity
+> - **Visual Documentation**: Leverage diagrams and prototypes to enhance understanding
+> - **Iterative Refinement**: Build, learn, refine in continuous cycles
+> - **Temporary Sessions**: Save outputs from LLM sessions to permanent storage
+
 ## 1. Requirements Discovery Phase
 
 **Input**: Initial user story or use case description  
 **Output**: Comprehensive specification document with diagrams
+
+> **Phase Summary**: Explore requirements through UI sketches, organize by functional modules, leverage Claude for ideation, create visual representations, validate with different models, and produce detailed specifications.
 
 ### Process Steps:
 
@@ -51,7 +62,11 @@ This document outlines a comprehensive, iterative approach to software developme
      - Improves traceability and makes referencing specific requirements easier
 
 3. **Collaborative Requirements Exploration with Claude**
-   - Use Claude to facilitate open-ended discussions that may span multiple modules
+   - Use Claude as the central tool for requirements ideation and exploration
+   - Begin with UI sketches to focus minds on functionality and flesh out use cases:
+     - Start with pencil sketches as input to the LLM
+     - Create simple wireframes using tools like Balsamiq or Figma
+     - Use these visual elements to drive concrete discussions about functionality
    - When a conversation begins to cover too many areas, use prompts to refocus:
      - "Let's park the payment processing ideas for now and focus on completing the user management requirements."
      - "I notice we're discussing several modules. Let's document these cross-cutting concerns and then return to our focus module."
@@ -66,6 +81,10 @@ This document outlines a comprehensive, iterative approach to software developme
      - Anticipate user needs and edge cases
      - Explore different technical implementation strategies
      - Compare pros and cons of various solutions
+   - **Important**: Treat LLM sessions as temporary workspaces
+     - Save important outputs before ending sessions
+     - Extract key insights, requirements, and designs to permanent storage
+     - Don't rely on file stores or project repositories provided by LLM tools for long-term retention
 
 4. **Create Visual Representations**
    - Develop diagrams using Mermaid specifically for the current module:
@@ -111,6 +130,8 @@ This document outlines a comprehensive, iterative approach to software developme
   - [Obsidian](https://obsidian.md/) - Knowledge management with Mermaid support
 
 - **UI Design & Prototyping**:
+  - [Pencil & Paper] - For initial sketches to drive requirements discussions
+  - [Balsamiq](https://balsamiq.com/) - Simple wireframing tool for early concepts
   - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework for rapid UI development
   - [React](https://reactjs.org/) - Component-based UI library
   - [Vite](https://vitejs.dev/) - Fast build tool for modern web projects
@@ -201,6 +222,8 @@ This organization allows stakeholders to easily navigate between different funct
 **Input**: Comprehensive specification document  
 **Output**: Working implementation of core use cases with project structure, architecture, and supporting assets
 
+> **Phase Summary**: Implement essential features, define architecture with Claude Code, establish project structure, create database schema, set up DevOps assets, and document implementation details. Generate working React code directly from UI mockups.
+
 ### Process Steps:
 
 1. **Implement Core Use Cases**
@@ -215,6 +238,10 @@ This organization allows stakeholders to easily navigate between different funct
    - Identify key components and their interactions
    - Determine appropriate design patterns
    - Choose technology stack based on requirements
+   - Leverage LLMs to generate working React code:
+     - Use UI mockups from requirements phase as visual references
+     - Generate code that can be directly integrated into the catalog site
+     - Refine generated code through iterative prompting
 
 3. **Create Folder Structure & Boilerplate**
    - Use Claude Code to generate an organized folder structure
@@ -266,6 +293,8 @@ This organization allows stakeholders to easily navigate between different funct
 **Input**: Working implementation of core use cases from Phase 2  
 **Output**: Refined and optimized application with improved quality and performance
 
+> **Phase Summary**: Focus on component-level refinement using Cursor Agent, refactor code for quality and performance, keep documentation updated, and gather feedback for the next iteration cycle.
+
 ### Process Steps:
 
 1. **Component-Level Refinement**
@@ -309,6 +338,8 @@ This organization allows stakeholders to easily navigate between different funct
   - [k6](https://k6.io/) - Load testing
 
 ## 4. Continuous Iteration
+
+> **Phase Summary**: Evaluate implementation against requirements, identify areas of deepened understanding, return to requirements with enhanced knowledge, update documentation, implement refinements, and continue the cycle until quality targets are met.
 
 The dsr-dev-proc process is inherently iterative. After completing the Refinement Phase, the team should cycle through the following steps, deepening understanding and improving implementation with each iteration:
 
@@ -413,29 +444,37 @@ Each iteration increases the resolution of understanding and improves the qualit
 
 ## Best Practices
 
-1. **Maintain Documentation Currency**
-   - Update documentation immediately after code changes
-   - Use documentation-as-code approaches when possible
-   - Automate documentation generation where appropriate
+> **Summary**: Keep documentation current, leverage appropriate LLM tools for specific tasks, establish phase checkpoints, embrace incremental improvement, and validate critical decisions with multiple perspectives.
 
-2. **Leverage LLM Strengths**
-   - Use Claude for creative ideation and requirement expansion
-   - Use Claude Code for structured code generation
-   - Use Cursor for targeted refinements and improvements
+### 1. **Maintain Documentation Currency**
+- Update documentation immediately after code changes
+- Use documentation-as-code approaches when possible
+- Automate documentation generation where appropriate
 
-3. **Establish Clear Checkpoints**
-   - Define clear criteria for moving between phases
-   - Ensure documentation meets quality standards before proceeding
-   - Validate with stakeholders at key milestones
+### 2. **Leverage LLM Strengths**
+- Use Claude for creative ideation and requirement expansion
+- Use Claude Code for structured code generation and React components
+- Use Cursor for targeted refinements and improvements
+- Save important outputs before ending LLM sessions
 
-4. **Embrace Incremental Improvement**
-   - Recognize that perfect understanding evolves over time
-   - Focus on continuous improvement rather than perfection
-   - Document known limitations and future enhancement opportunities
+### 3. **Start with UI**
+- Begin with pencil sketches to drive requirements discussions
+- Use simple wireframes to focus on functionality and user experience
+- Generate working React code from UI mockups
 
-5. **Cross-Validate Critical Decisions**
-   - Use multiple LLMs for important architectural decisions
-   - Seek diverse perspectives on complex problems
-   - Document alternative approaches considered
+### 4. **Establish Clear Checkpoints**
+- Define clear criteria for moving between phases
+- Ensure documentation meets quality standards before proceeding
+- Validate with stakeholders at key milestones
+
+### 5. **Embrace Incremental Improvement**
+- Recognize that perfect understanding evolves over time
+- Focus on continuous improvement rather than perfection
+- Document known limitations and future enhancement opportunities
+
+### 6. **Cross-Validate Critical Decisions**
+- Use multiple LLMs for important architectural decisions
+- Seek diverse perspectives on complex problems
+- Document alternative approaches considered
 
 By following the dsr-dev-proc process and adhering to these best practices, teams can leverage the power of LLMs to create well-documented, thoughtfully designed software systems that evolve through iterative refinement.
